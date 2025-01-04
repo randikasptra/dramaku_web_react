@@ -1,0 +1,18 @@
+FROM python:3.9-slim
+
+ENV DOCKER=true
+
+WORKDIR /app
+
+COPY ./requirements.txt ./
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY ./database/ ./
+
+COPY ./wait-for-it.sh /usr/local/bin/wait-for-it
+
+RUN chmod +x /usr/local/bin/wait-for-it
+
+CMD ["wait-for-it", "db:5432", "--", "python", "seeder.py"]
+

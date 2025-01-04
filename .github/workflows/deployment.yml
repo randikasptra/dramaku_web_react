@@ -1,0 +1,17 @@
+name: Deploy to Production Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Trigger Vercel Production Deployment
+        run: curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_19KzUY0d5sU3rtMxo1LwKfkjiDBN/OLszUw8YH4
